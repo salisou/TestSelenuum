@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:OnlineCourseUIDesigns.Controls"
+             x:Class="OnlineCourseUIDesigns.MVVM.Views.WelcomeView"
+             xmlns:templates="clr-namespace:OnlineCourseUIDesigns.MVVM.Views.Templates"
+             Shell.NavBarIsVisible="False"
+             Title="WelcomeView">
+
+    <Grid IsClippedToBounds="True">
+        <FlexLayout BindableLayout.ItemsSource="{Binding Items}"
+                    BindableLayout.ItemTemplateSelector="{StaticResource GalleryItemTemplateSelector}"
+                    Style="{StaticResource GalleryStyle}" />
+        <Grid RowDefinitions="2.5*, 1.5*">
+            <Label Text="KIDS FASHION"
+                   Style="{StaticResource TitleStyle}"/>
+            <Grid Grid.RowSpan="2"
+                  BackgroundColor="Black"
+                  Opacity="0.15"/>
+            <Border Grid.Row="1"
+                    Style="{StaticResource GetStartedBorderStyle}">
+                <Grid RowDefinitions="Auto, Auto, *"
+                      Style="{StaticResource GetStartedLayoutStyle}">
+                    <Label Text="DISCOVER OUR NEW DRESS FOR YOU"
+                           Style="{StaticResource GetStartedTitleStyle}"/>
+                    <Label Grid.Row="1" 
+                           Text="Discover Trendy Outfits, Chic Accesories Cozy Essentials for Kids of All Ages."
+                           Style="{StaticResource GetStartedDescriptionStyle}"/>
+                    
+                    <!-- SwipeAction -->
+                    <controls:SwipeAction Grid.Row="2"
+                                          SwipeActionCommand="{Binding GoToHomeCommand}"
+                                          Style="{StaticResource SwipeActionStyle}">
+                        <controls:SwipeAction.Track>
+                            <Border 
+                            Style="{StaticResource SwipeActionTrackStyle}">
+                                <HorizontalStackLayout Opacity="0.75"
+                                                       HorizontalOptions="End"
+                                                       Margin="6, 0">
+                                    <Label Text=">" TextColor="#5D585C" Style="{StaticResource SwipeActionDirectionTextStyle}"/>
+                                    <Label Text=">" TextColor="#939192" Style="{StaticResource SwipeActionDirectionTextStyle}"/>
+                                    <Label Text=">" TextColor="White" Style="{StaticResource SwipeActionDirectionTextStyle}"/>
+                                </HorizontalStackLayout>
+                            </Border>
+                        </controls:SwipeAction.Track>
+                        <controls:SwipeAction.Thumb>
+                            <Border Style="{StaticResource SwipeActionThumbStyle}">
+                                <Grid>
+                                    <Label Text="GET STARTED" Style="{StaticResource SwipeActionTextStyle}"/>
+                                </Grid>
+                            </Border>
+                        </controls:SwipeAction.Thumb>
+                    </controls:SwipeAction>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</ContentPage>

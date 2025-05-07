@@ -1,12 +1,13 @@
+
 using OnlineCourseUIDesigns.MVVM.ViewModels;
 
 namespace OnlineCourseUIDesigns.MVVM.Views;
 
 public partial class HomeView : ContentPage
 {
-    public HomeView(WelcomeViewModel vm)
+    public HomeView()
     {
         InitializeComponent();
-        BindingContext = vm;
+        BindingContext = new HomeViewModel();
     }
 }

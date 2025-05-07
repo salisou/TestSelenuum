@@ -1,12 +1,113 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:OnlineCourseUIDesigns.Controls"
              x:Class="OnlineCourseUIDesigns.MVVM.Views.HomeView"
+             BackgroundColor="White"
+             Shell.NavBarIsVisible="False"
              Title="HomeView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <Grid>
+        <ScrollView>
+            <Grid RowDefinitions="Auto, Auto, Auto, *" Margin="12">
+                <!--top bar-->
+
+                <Grid ColumnDefinitions="Auto, *, Auto">
+                    <Border Style="{StaticResource ProfileBorderStyle}">
+                        <Image Aspect="AspectFill" Source="blazergloria.jpg"/>
+                    </Border>
+
+                    <VerticalStackLayout Grid.Column="1">
+                        <Label Text="Welcome back" Style="{StaticResource WelcomeTextStyle}"/>
+                        <Label Text="Gloria" Style="{StaticResource UserNameTextStyle}"/>
+                    </VerticalStackLayout>
+
+                    <Border Grid.Column="2" Style="{StaticResource NotificationBorderStyle}">
+                        <Image Source="bell_icon.png" Aspect="AspectFill"/>
+                    </Border>
+                </Grid>
+
+                <!--promotion-->
+                <Grid Grid.Row="1" BindingContext="{Binding Promotion}">
+                    <Border  Style="{StaticResource PromoBorderStyle}">
+                        <Grid RowSpacing="0" RowDefinitions="Auto,*,Auto">
+                            <Label Text="{Binding Title}" Style="{StaticResource PromoTitleStyle}"/>
+                            <Label Grid.Row="1" Text="{Binding Discount}" Style="{StaticResource PromoDiscountStyle}"/>
+                            <Button Grid.Row="3" Text="{Binding Button}" Style="{StaticResource PromoButtonStyle}"/>
+                        </Grid>
+                    </Border>
+                    <Image Source="{Binding Image}" Style="{StaticResource PromoImageStyle}"/>
+                </Grid>
+
+                <!--Categories-->
+                <CollectionView Grid.Row="2"
+                                SelectionMode="Single"
+                                SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
+                                ItemsSource="{Binding Categories}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Style="{StaticResource CategoriesContainerStyle}">
+                                <Border x:Name="CategoryItemBorder" Style="{StaticResource CategoriesBorderStyle}">
+                                    <Label x:Name="CategoryItemText" Text="{Binding }" Style="{StaticResource CategoriesTextStyle}"/>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Rroducts -->
+                <Grid Grid.Row="3" RowDefinitions="Auto, *" >
+                    <Grid ColumnDefinitions="*, *">
+                        <Label Text="Popolar Products" Style="{StaticResource SectionStyle}"/>
+                        <Label Text="See All" Grid.Column="1" Style="{StaticResource ViewStyle}"/>
+                    </Grid>
+
+                    <CollectionView Grid.Row="1" ItemsSource="{Binding Products}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical"
+                                             Span="2"
+                                             VerticalItemSpacing="6"
+                                             HorizontalItemSpacing="5"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid RowDefinitions="*, Auto, Auto" Style="{StaticResource ProductContainerStyle}">
+                                    <Border Style="{StaticResource ProductBorderStyle}" >
+                                        <Grid>
+                                            <Image Source="{Binding Image}" Aspect="AspectFill"/>
+                                            <Border Style="{StaticResource ProductFavoriteBorderStyle}">
+                                                <control:ToggleButton Checked="False"
+                                                                      CheckedImage="heart_icon"
+                                                                      UnCheckedImage="heart_fill_icon"/>
+                                                <!--<Image Source="heart_fill_icon" Aspect="AspectFill" />-->
+                                            </Border>
+                                        </Grid>
+                                    </Border>
+                                    <Label Grid.Row="1" 
+                                           Text="{Binding Title}" 
+                                           Style="{StaticResource ProductTitleStyle}"/>
+                                    <Label Grid.Row="2" 
+                                           Style="{StaticResource ProductPriceStyle}"
+                                           Text="{Binding Price, StringFormat='${0:F2}'}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </Grid>
+        </ScrollView>
+        
+        <!---SEGMENTEDCONTROL-->
+        <Border StrokeShape="RoundRectangle 24"
+                StrokeThickness="0"
+                HeightRequest="60"
+                VerticalOptions="End"
+                BackgroundColor="Black"
+                Margin="12, 20">
+            
+        </Border>
+    </Grid>
 </ContentPage>

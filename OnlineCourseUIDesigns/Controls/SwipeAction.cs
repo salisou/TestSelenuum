@@ -130,7 +130,7 @@ namespace OnlineCourseUIDesigns.Controls
                         SwipeActionCompleted?.Invoke(this, EventArgs.Empty);
 
                         // Navigazione alla pagina DetailView usando Shell
-                        await Shell.Current.GoToAsync(nameof(DetailView));
+                        await Shell.Current.GoToAsync(nameof(HomeView));
 
                         // Navigazione alla pagina DetailView
                         //if (Application.Current?.MainPage is NavigationPage navigationPage)

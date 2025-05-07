@@ -8,7 +8,7 @@ namespace OnlineCourseUIDesigns
         {
             InitializeComponent();
 
-            Routing.RegisterRoute(nameof(DetailView), typeof(DetailView));
+            Routing.RegisterRoute(nameof(HomeView), typeof(HomeView));
         }
     }
 }
